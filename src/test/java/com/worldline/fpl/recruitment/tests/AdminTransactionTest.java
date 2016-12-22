@@ -10,13 +10,7 @@ import java.io.StringWriter;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import com.worldline.fpl.recruitment.StartBoot;
 
 /**
  * Account test
@@ -24,9 +18,6 @@ import com.worldline.fpl.recruitment.StartBoot;
  * @author A525125
  *
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = StartBoot.class)
-@ActiveProfiles("tests")
 public class AdminTransactionTest extends AbstractTest {
 
 	@Test
