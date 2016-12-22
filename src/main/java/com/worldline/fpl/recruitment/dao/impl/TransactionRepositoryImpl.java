@@ -3,7 +3,6 @@ package com.worldline.fpl.recruitment.dao.impl;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -34,7 +33,7 @@ public class TransactionRepositoryImpl implements TransactionRepository,
 			Transaction transaction = new Transaction();
 			transaction.setAccountId("1");
 			transaction.setBalance(BigDecimal.valueOf(42.12));
-			transaction.setId(UUID.randomUUID().toString());
+			transaction.setId("1");
 			transaction.setNumber("12151885120");
 			transactions.add(transaction);
 		}
@@ -42,7 +41,7 @@ public class TransactionRepositoryImpl implements TransactionRepository,
 			Transaction transaction = new Transaction();
 			transaction.setAccountId("1");
 			transaction.setBalance(BigDecimal.valueOf(456.00));
-			transaction.setId(UUID.randomUUID().toString());
+			transaction.setId("2");
 			transaction.setNumber("12151885121");
 			transactions.add(transaction);
 		}
@@ -50,7 +49,7 @@ public class TransactionRepositoryImpl implements TransactionRepository,
 			Transaction transaction = new Transaction();
 			transaction.setAccountId("1");
 			transaction.setBalance(BigDecimal.valueOf(-12.12));
-			transaction.setId(UUID.randomUUID().toString());
+			transaction.setId("3");
 			transaction.setNumber("12151885122");
 			transactions.add(transaction);
 		}
