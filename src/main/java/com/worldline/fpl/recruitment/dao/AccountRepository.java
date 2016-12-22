@@ -22,7 +22,7 @@ public interface AccountRepository {
 	 *            the pageable information
 	 * @return the account list
 	 */
-	Page<Account> getAccounts(Pageable p);
+	Page<Account> findAll(Pageable p);
 
 	/**
 	 * Get account
@@ -31,7 +31,7 @@ public interface AccountRepository {
 	 *            the account id
 	 * @return
 	 */
-	Optional<Account> getAccount(String accountId);
+	Optional<Account> findById(String accountId);
 
 	/**
 	 * Check if an account exists

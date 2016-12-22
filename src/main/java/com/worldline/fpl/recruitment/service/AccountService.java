@@ -42,7 +42,7 @@ public class AccountService {
 	 * @return the account list
 	 */
 	public Page<AccountResponse> getAccounts(Pageable p) {
-		return new PageImpl<AccountResponse>(accountRepository.getAccounts(p)
+		return new PageImpl<AccountResponse>(accountRepository.findAll(p)
 				.getContent().stream().map(this::mapToAccountResponse)
 				.collect(Collectors.toList()));
 	}
@@ -67,7 +67,7 @@ public class AccountService {
 	 */
 	public AccountDetailsResponse getAccountDetails(String accountId) {
 		log.debug("Find account {}", accountId);
-		Account account = accountRepository.getAccount(accountId).orElseThrow(
+		Account account = accountRepository.findById(accountId).orElseThrow(
 				() -> new ServiceException(ErrorCode.INVALID_ACCOUNT,
 						"Account doesn't exist"));
 		return mapToAccountDetailsResponse(account);

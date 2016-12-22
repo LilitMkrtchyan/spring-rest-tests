@@ -55,12 +55,12 @@ public class AccountRepositoryImpl implements AccountRepository,
 	}
 
 	@Override
-	public Page<Account> getAccounts(Pageable p) {
+	public Page<Account> findAll(Pageable p) {
 		return new PageImpl<Account>(accounts);
 	}
 
 	@Override
-	public Optional<Account> getAccount(String accountId) {
+	public Optional<Account> findById(String accountId) {
 		return accounts.stream().filter(a -> a.getId().equals(accountId))
 				.findFirst();
 	}
