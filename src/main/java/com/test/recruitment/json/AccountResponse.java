@@ -29,5 +29,4 @@ public class AccountResponse implements Serializable {
 
 	@NotNull
 	private BigDecimal balance;
-
 }

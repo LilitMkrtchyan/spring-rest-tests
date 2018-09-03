@@ -23,5 +23,4 @@ public abstract class AbstractTransaction implements Serializable {
 
 	@NotNull
 	private BigDecimal balance;
-
 }

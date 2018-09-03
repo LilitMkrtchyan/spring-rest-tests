@@ -2,6 +2,8 @@ package com.test.recruitment.service;
 
 import java.util.stream.Collectors;
 
+import com.test.recruitment.mapper.AccountMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -25,14 +27,12 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Service
+@AllArgsConstructor(onConstructor = @__({@Autowired}))
 public class AccountService {
 
-	private AccountRepository accountRepository;
+	private AccountMapper accountMapper;
 
-	@Autowired
-	public AccountService(AccountRepository accountRepository) {
-		this.accountRepository = accountRepository;
-	}
+	private AccountRepository accountRepository;
 
 	/**
 	 * Get account by user
@@ -42,8 +42,8 @@ public class AccountService {
 	 * @return the account list
 	 */
 	public Page<AccountResponse> getAccounts(Pageable p) {
-		return new PageImpl<AccountResponse>(accountRepository.findAll(p)
-				.getContent().stream().map(this::mapToAccountResponse)
+		return new PageImpl<>(accountRepository.findAll(p)
+				.getContent().stream().map(accountMapper::mapToAccountResponse)
 				.collect(Collectors.toList()));
 	}
 
@@ -70,41 +70,6 @@ public class AccountService {
 		Account account = accountRepository.findById(accountId).orElseThrow(
 				() -> new ServiceException(ErrorCode.NOT_FOUND_ACCOUNT,
 						"Account doesn't exist"));
-		return mapToAccountDetailsResponse(account);
+		return accountMapper.mapToAccountDetailsResponse(account);
 	}
-
-	/**
-	 * Map {@link Account} to {@link AccountResponse}
-	 * 
-	 * @param account
-	 *            the entity
-	 * @return the response
-	 */
-	private AccountResponse mapToAccountResponse(Account account) {
-		AccountResponse result = new AccountResponse();
-		result.setBalance(account.getBalance());
-		result.setId(account.getId());
-		result.setNumber(account.getNumber());
-		result.setType(account.getType());
-		return result;
-	}
-
-	/**
-	 * Map {@link Account} to {@link AccountDetailsResponse}
-	 * 
-	 * @param account
-	 *            the entity
-	 * @return the response
-	 */
-	private AccountDetailsResponse mapToAccountDetailsResponse(Account account) {
-		AccountDetailsResponse result = new AccountDetailsResponse();
-		result.setActive(account.isActive());
-		result.setCreationDate(account.getCreationDate());
-		result.setBalance(account.getBalance());
-		result.setId(account.getId());
-		result.setNumber(account.getNumber());
-		result.setType(account.getType());
-		return result;
-	}
-
 }

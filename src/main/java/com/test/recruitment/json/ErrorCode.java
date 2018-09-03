@@ -13,7 +13,7 @@ import lombok.Getter;
  */
 @AllArgsConstructor
 public enum ErrorCode {
-
+	BAD_REQUEST(HttpStatus.BAD_REQUEST),
 	NOT_FOUND_ACCOUNT(HttpStatus.NOT_FOUND),
 	NOT_FOUND_TRANSACTION(HttpStatus.NOT_FOUND),
 	FORBIDDEN_TRANSACTION(HttpStatus.FORBIDDEN);

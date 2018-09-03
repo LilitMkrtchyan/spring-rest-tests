@@ -1,5 +1,6 @@
 package com.test.recruitment.tests;
 
+import com.test.recruitment.StartBoot;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,27 +11,23 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.test.recruitment.StartBoot;
-
 /**
  * Abstract test class
- * 
- * @author A525125
  *
+ * @author A525125
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = StartBoot.class)
 @ActiveProfiles("tests")
 public abstract class AbstractTest {
 
-	@Autowired
-	private WebApplicationContext webApplicationContext;
+    protected MockMvc mockMvc;
+    @Autowired
+    private WebApplicationContext webApplicationContext;
 
-	protected MockMvc mockMvc;
-
-	@Before
-	public void setup() throws Exception {
-		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
-				.build();
-	}
+    @Before
+    public void setup() throws Exception {
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
+                .build();
+    }
 }

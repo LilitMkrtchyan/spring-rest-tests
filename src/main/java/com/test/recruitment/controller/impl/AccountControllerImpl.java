@@ -1,5 +1,6 @@
 package com.test.recruitment.controller.impl;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +25,10 @@ import com.test.recruitment.service.AccountService;
  */
 @Slf4j
 @RestController
+@AllArgsConstructor(onConstructor = @__({@Autowired}))
 public class AccountControllerImpl implements AccountController {
 
 	private AccountService accountService;
-
-	@Autowired
-	public AccountControllerImpl(AccountService accountService) {
-		this.accountService = accountService;
-	}
 
 	@Override
 	public ResponseEntity<Page<AccountResponse>> getAccounts(

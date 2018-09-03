@@ -10,7 +10,7 @@ import lombok.ToString;
 
 /**
  * Transaction json representation
- * 
+ *
  * @author A525125
  *
  */
@@ -24,5 +24,6 @@ public class TransactionResponse extends AbstractTransaction implements
 
 	@NotNull
 	private String id;
-
+	@NotNull
+	private String accountId;
 }

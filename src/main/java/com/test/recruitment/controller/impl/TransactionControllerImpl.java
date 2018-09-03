@@ -1,5 +1,6 @@
 package com.test.recruitment.controller.impl;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,14 +24,10 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @RestController
+@AllArgsConstructor(onConstructor = @__({@Autowired}))
 public class TransactionControllerImpl implements TransactionController {
 
 	private TransactionService transactionService;
-
-	@Autowired
-	public TransactionControllerImpl(TransactionService transactionService) {
-		this.transactionService = transactionService;
-	}
 
 	@Override
 	public ResponseEntity<Page<TransactionResponse>> getTransactionsByAccount(

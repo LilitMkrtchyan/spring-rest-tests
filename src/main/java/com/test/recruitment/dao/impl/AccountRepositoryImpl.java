@@ -56,7 +56,7 @@ public class AccountRepositoryImpl implements AccountRepository,
 
 	@Override
 	public Page<Account> findAll(Pageable p) {
-		return new PageImpl<Account>(accounts);
+		return new PageImpl<>(accounts);
 	}
 
 	@Override
