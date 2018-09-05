@@ -1,23 +1,10 @@
 package com.test.recruitment.service;
 
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-
 import com.test.recruitment.dao.TransactionRepository;
 import com.test.recruitment.entity.Transaction;
+import com.test.recruitment.exception.ServiceException;
 import com.test.recruitment.json.ErrorCode;
 import com.test.recruitment.json.TransactionResponse;
-import com.test.recruitment.exception.ServiceException;
-import com.worldline.fpl.recruitment.dao.TransactionRepository;
-import com.worldline.fpl.recruitment.entity.Transaction;
-import com.worldline.fpl.recruitment.exception.ServiceException;
-import com.worldline.fpl.recruitment.json.ErrorCode;
-import com.worldline.fpl.recruitment.json.TransactionResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

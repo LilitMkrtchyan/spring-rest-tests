@@ -6,7 +6,7 @@
 		<artifactId>spring-cloud-starter-parent</artifactId>
 		<version>Camden.RELEASE</version>
 	</parent>
-	<groupId>com.worldline.fpl.recruitment</groupId>
+	<groupId>com.test.recruitment</groupId>
 	<artifactId>fpl-recruitment</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
