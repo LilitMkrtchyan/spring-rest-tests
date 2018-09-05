@@ -1,28 +1,27 @@
 package com.test.recruitment.json;
 
-import java.io.Serializable;
-
-import javax.validation.constraints.NotNull;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+
 /**
  * Transaction json representation
- * 
- * @author A525125
  *
+ * @author A525125
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class TransactionResponse extends AbstractTransaction implements
-		Serializable {
+        Serializable {
 
-	private static final long serialVersionUID = -2371720864101586328L;
+    private static final long serialVersionUID = -2371720864101586328L;
 
-	@NotNull
-	private String id;
-
+    @NotNull
+    private String id;
+    @NotNull
+    private String accountId;
 }
