@@ -8,4 +8,4 @@ server:
   
 logging:
   level:
-    com.worldline.fpl.recruitment=DEBUG
+    com.test.recruitment=DEBUG

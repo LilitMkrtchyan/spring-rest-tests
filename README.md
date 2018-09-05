@@ -1,4 +1,4 @@
-# Worldline Technical Test
+# Technical Test
 
 ## Content
 
@@ -34,7 +34,7 @@ List of prerequisites to realize the test:
 ## <a name="eval"></a>Evaluation
 ### <a name="criterias"></a>Criterias
 
-The aim of this evaluation is to check if you have the basic competences to integrate a Worldline FPL Digital Banking development team. To verify these competences, we will analyze the following elements: 
+The aim of this evaluation is to check if you have the basic competences to integrate a development team. To verify these competences, we will analyze the following elements: 
 
 * Your developments
 * Your analysis
@@ -84,7 +84,7 @@ Install and run the project on your device/PC
 1. Retrieve the __GITHUB__ project : [__Fork the repository__](https://help.github.com/articles/fork-a-repo/)
 2. Mount the project on your development IDE (Eclipse or other …)
 3. Compile the project (Java and Maven compilation)
-4. Launch the project (Launch the Main class of project : com.worldline.fpl.recruitment.StartBoot)
+4. Launch the project (Launch the Main class of project : StartBoot)
 
 #### <a name="exercise2"></a>Exercise 2
 
@@ -134,7 +134,7 @@ Send a merge request.
 
 #### <a name="exercise5"></a>Exercise 5
 
-For the next application version, Worldline wants to change the management of data in application. Indeed, currently the application stores the accounts and the transactions directly in the JAVA services. 
+For the next application version, we wants to change the management of data in application. Indeed, currently the application stores the accounts and the transactions directly in the JAVA services. 
 
 This situation is no longer acceptable and the application must be refactored with a real database service.
 
