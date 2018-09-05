@@ -41,11 +41,31 @@ public class AdminTransactionTest extends AbstractTest {
 	}
 
 	@Test
+	public void createTransactionOnNonExistingAccount() throws Exception {
+		String request = getRequest("createOk");
+
+		mockMvc.perform(
+				post("/accounts/10/transactions").contentType(
+						MediaType.APPLICATION_JSON).content(request))
+				.andExpect(status().isNotFound());
+	}
+
+	@Test
+	public void createTransactionWithEmptyAccountId() throws Exception {
+		String request = getRequest("createOk");
+
+		mockMvc.perform(
+				post("/accounts/ /transactions").contentType(
+						MediaType.APPLICATION_JSON).content(request))
+				.andExpect(status().isBadRequest());
+	}
+
+	@Test
 	public void updateTransaction() throws Exception {
 		String request = getRequest("updateOk");
 
 		mockMvc.perform(
-				put("/accounts/1/transactions/3").contentType(
+				put("/accounts/1/transactions/2").contentType(
 						MediaType.APPLICATION_JSON).content(request))
 				.andExpect(status().isNoContent());
 	}
@@ -81,6 +101,16 @@ public class AdminTransactionTest extends AbstractTest {
 	}
 
 	@Test
+	public void updateTransactionWithEmptyAccountId() throws Exception {
+		String request = "test";
+
+		mockMvc.perform(
+				put("/accounts/ /transactions/3").contentType(
+						MediaType.APPLICATION_JSON).content(request))
+				.andExpect(status().isBadRequest());
+	}
+
+	@Test
 	public void deleteTransaction() throws Exception {
 		mockMvc.perform(delete("/accounts/1/transactions/1")).andExpect(
 				status().isNoContent());
@@ -95,6 +125,12 @@ public class AdminTransactionTest extends AbstractTest {
 	@Test
 	public void deleteUnexistingTransaction() throws Exception {
 		mockMvc.perform(delete("/accounts/1/transactions/99")).andExpect(
+				status().isNotFound());
+	}
+
+	@Test
+	public void deleteTransactionOnNonExistingAccount() throws Exception {
+		mockMvc.perform(delete("/accounts/10/transactions/1")).andExpect(
 				status().isNotFound());
 	}
 

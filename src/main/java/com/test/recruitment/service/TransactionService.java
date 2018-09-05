@@ -5,6 +5,7 @@ import com.test.recruitment.entity.Transaction;
 import com.test.recruitment.exception.ServiceException;
 import com.test.recruitment.json.ErrorCode;
 import com.test.recruitment.json.TransactionResponse;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,45 +22,10 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Service
+@AllArgsConstructor(onConstructor = @__({@Autowired}))
 public class TransactionService {
-
     private AccountService accountService;
-
     private TransactionRepository transactionRepository;
-
-    @Autowired
-    public TransactionService(AccountService accountService,
-                              TransactionRepository transactionRepository) {
-        this.accountService = accountService;
-        this.transactionRepository = transactionRepository;
-    }
-
-    /**
-     * Delete transaction by provided id
-     *
-     * @param transactionId the transaction id
-     */
-    public void deleteTransaction(String transactionId) {
-        log.debug("Delete transaction {}", transactionId);
-        transactionRepository.deleteById(transactionId);
-    }
-
-    /**
-     * Get transaction by provided id
-     *
-     * @param transactionId the transaction id
-     * @return Transaction
-     */
-    public TransactionResponse getTransaction(String transactionId) {
-        log.debug("Find transaction {}", transactionId);
-        Transaction transaction = transactionRepository.findById(transactionId);
-        if (transaction == null) {
-            log.debug("Can not find transaction for provided id : {}", transactionId);
-            throw new ServiceException(ErrorCode.NOT_FOUND_TRANSACTION,
-                    "Transaction doesn't exist");
-        }
-        return map(transaction);
-    }
 
     /**
      * Get transactions by account

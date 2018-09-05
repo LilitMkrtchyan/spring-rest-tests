@@ -1,18 +1,18 @@
 package com.test.recruitment.dao.impl;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.test.recruitment.dao.TransactionRepository;
+import com.test.recruitment.entity.Transaction;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
-import com.test.recruitment.dao.TransactionRepository;
-import com.test.recruitment.entity.Transaction;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of {@link TransactionRepository}
@@ -26,7 +26,7 @@ public class TransactionRepositoryImpl implements TransactionRepository,
     private List<Transaction> transactions;
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         transactions = new ArrayList<>();
         {
             Transaction transaction = new Transaction();
@@ -55,21 +55,26 @@ public class TransactionRepositoryImpl implements TransactionRepository,
     }
 
     @Override
+    public void save(Transaction transaction) {
+        transactions.add(transaction);
+    }
+
+    @Override
     public void deleteById(String id) {
         transactions.removeIf(transaction -> transaction.getId().equals(id));
     }
 
     @Override
-    public Transaction findById(String id) {
+    public Optional<Transaction> findById(String id) {
         return transactions.stream()
                 .filter(transaction -> transaction.getId().equals(id))
-                .findFirst().orElse(null);
+                .findFirst();
     }
 
     @Override
     public Page<Transaction> getTransactionsByAccount(String accountId,
                                                       Pageable p) {
-        return new PageImpl<Transaction>(transactions.stream()
+        return new PageImpl<>(transactions.stream()
                 .filter(t -> t.getAccountId().equals(accountId))
                 .collect(Collectors.toList()));
     }

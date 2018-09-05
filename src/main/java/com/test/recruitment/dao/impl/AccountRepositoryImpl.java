@@ -1,19 +1,18 @@
 package com.test.recruitment.dao.impl;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-
+import com.test.recruitment.dao.AccountRepository;
+import com.test.recruitment.entity.Account;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
-import com.test.recruitment.dao.AccountRepository;
-import com.test.recruitment.entity.Account;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Implementation of {@link AccountRepository}
