@@ -42,5 +42,4 @@ public interface AccountController {
 	@RequestMapping(value = "/{accountId}", method = RequestMethod.GET)
 	ResponseEntity<AccountDetailsResponse> getAccountDetails(
 			@PathVariable("accountId") String accountId);
-
 }

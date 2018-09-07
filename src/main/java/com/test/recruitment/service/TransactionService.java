@@ -1,10 +1,10 @@
 package com.test.recruitment.service;
 
 import com.test.recruitment.dao.TransactionRepository;
-import com.test.recruitment.entity.Transaction;
 import com.test.recruitment.exception.ServiceException;
 import com.test.recruitment.json.ErrorCode;
 import com.test.recruitment.json.TransactionResponse;
+import com.test.recruitment.mapper.TransactionMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +20,15 @@ import java.util.stream.Collectors;
  *
  * @author A525125
  */
-@Slf4j
 @Service
+@Slf4j
 @AllArgsConstructor(onConstructor = @__({@Autowired}))
 public class TransactionService {
+
     private AccountService accountService;
+
+    private TransactionMapper transactionMapper;
+
     private TransactionRepository transactionRepository;
 
     /**
@@ -42,21 +46,6 @@ public class TransactionService {
         }
         return new PageImpl<>(transactionRepository
                 .getTransactionsByAccount(accountId, p).getContent().stream()
-                .map(this::map).collect(Collectors.toList()));
-    }
-
-    /**
-     * Map {@link Transaction} to {@link TransactionResponse}
-     *
-     * @param transaction
-     * @return
-     */
-    private TransactionResponse map(Transaction transaction) {
-        TransactionResponse result = new TransactionResponse();
-        result.setId(transaction.getId());
-        result.setNumber(transaction.getNumber());
-        result.setBalance(transaction.getBalance());
-        result.setAccountId(transaction.getAccountId());
-        return result;
+                .map(transactionMapper::mapToTransactionResponse).collect(Collectors.toList()));
     }
 }

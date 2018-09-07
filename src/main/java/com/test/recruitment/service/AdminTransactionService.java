@@ -25,6 +25,7 @@ import java.util.UUID;
 @Service
 @AllArgsConstructor(onConstructor = @__({@Autowired}))
 public class AdminTransactionService {
+
     private TransactionMapper transactionMapper;
     private AccountService accountService;
     private TransactionRepository transactionRepository;
@@ -41,7 +42,7 @@ public class AdminTransactionService {
         Assert.hasText(accountId, "Account id should be provided");
         Assert.hasText(transactionId, "Transaction id should be provided");
 
-        Transaction transaction = getTransaction(transactionId);
+        Transaction transaction = getTransactionById(transactionId);
         validateAccountId(transaction.getAccountId(), accountId);
         transactionRepository.deleteById(transactionId);
     }
@@ -80,15 +81,12 @@ public class AdminTransactionService {
         validateTransaction(request);
 
         checkIsAccountExist(accountId);
-        Transaction transaction = getTransaction(transactionId);
-        validateAccountId(transaction.getAccountId(), accountId);
-        transaction.setNumber(request.getNumber());
-        transaction.setBalance(request.getBalance());
-        Transaction t = transactionMapper.mapToTransaction(request);
-        t.setId(transactionId);
-        transactionRepository.save(t);
+        Transaction transactionById = getTransactionById(transactionId);
+        validateAccountId(transactionById.getAccountId(), accountId);
 
-
+        Transaction transaction = transactionMapper.mapToTransaction(request);
+        transaction.setId(transactionId);
+        transactionRepository.update(transaction);
     }
 
     /**
@@ -98,7 +96,7 @@ public class AdminTransactionService {
      * @param transactionId the transaction id
      * @return Transaction
      */
-    private Transaction getTransaction(String transactionId) {
+    private Transaction getTransactionById(String transactionId) {
         return transactionRepository.findById(transactionId).orElseThrow(() -> new ServiceException(ErrorCode.NOT_FOUND_TRANSACTION,
                 "Transaction doesn't exist"));
     }

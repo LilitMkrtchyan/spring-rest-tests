@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+
 /**
  * Implementation of {@link AdminTransactionController}
  *
@@ -20,6 +21,7 @@ import javax.validation.Valid;
 @RestController
 @AllArgsConstructor(onConstructor = @__({@Autowired}))
 public class AdminTransactionControllerImpl implements AdminTransactionController {
+
     private AdminTransactionService adminTransactionService;
 
     @Override

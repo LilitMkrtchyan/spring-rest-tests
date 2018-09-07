@@ -36,5 +36,4 @@ public class AccountTest extends AbstractTest {
 		mockMvc.perform(get("/accounts/test")).andExpect(status().isNotFound())
 				.andExpect(jsonPath("$.errorCode", is("NOT_FOUND_ACCOUNT")));
 	}
-
 }

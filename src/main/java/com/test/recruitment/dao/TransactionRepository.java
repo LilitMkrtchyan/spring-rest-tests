@@ -1,8 +1,9 @@
 package com.test.recruitment.dao;
 
-import com.test.recruitment.entity.Transaction;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import com.test.recruitment.entity.Transaction;
 
 import java.util.Optional;
 
@@ -10,8 +11,10 @@ import java.util.Optional;
  * Transaction repository
  *
  * @author A525125
+ *
  */
 public interface TransactionRepository {
+
     /**
      * Deletes the entity with the given transaction id.
      *
@@ -26,6 +29,13 @@ public interface TransactionRepository {
      */
     void save(Transaction transaction);
 
+	/**
+	 * Updates a given transaction
+	 *
+	 * @param transaction the transaction object to be updated
+	 */
+	void update(Transaction transaction);
+
     /**
      * Returns transaction by id
      *
@@ -34,12 +44,15 @@ public interface TransactionRepository {
      */
     Optional<Transaction> findById(String id);
 
-    /**
-     * Get transactions by account
-     *
-     * @param accountId the account id
-     * @param p         the pageable information
-     * @return
-     */
-    Page<Transaction> getTransactionsByAccount(String accountId, Pageable p);
+
+	/**
+	 * Get transactions by account
+	 * 
+	 * @param accountId
+	 *            the account id
+	 * @param p
+	 *            the pageable information
+	 * @return
+	 */
+	Page<Transaction> getTransactionsByAccount(String accountId, Pageable p);
 }

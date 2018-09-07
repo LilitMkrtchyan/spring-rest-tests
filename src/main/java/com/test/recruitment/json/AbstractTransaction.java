@@ -13,6 +13,7 @@ import java.math.BigDecimal;
  */
 @Data
 public abstract class AbstractTransaction implements Serializable {
+
     private static final long serialVersionUID = 7866293071140304316L;
 
     @NotNull(message = "Number must be provided")

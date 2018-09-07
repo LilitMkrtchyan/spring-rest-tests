@@ -1,18 +1,19 @@
 package com.test.recruitment.dao.impl;
 
-import com.test.recruitment.dao.AccountRepository;
-import com.test.recruitment.entity.Account;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import com.test.recruitment.dao.AccountRepository;
+import com.test.recruitment.entity.Account;
 
 /**
  * Implementation of {@link AccountRepository}
@@ -55,7 +56,7 @@ public class AccountRepositoryImpl implements AccountRepository,
 
 	@Override
 	public Page<Account> findAll(Pageable p) {
-		return new PageImpl<Account>(accounts);
+		return new PageImpl<>(accounts);
 	}
 
 	@Override

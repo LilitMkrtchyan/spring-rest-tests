@@ -3,6 +3,7 @@ package com.test.recruitment.mapper;
 import com.test.recruitment.entity.Transaction;
 import com.test.recruitment.json.CreateTransactionRequest;
 import com.test.recruitment.json.UpdateTransactionRequest;
+import com.test.recruitment.json.TransactionResponse;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class TransactionMapper {
+
     /**
      * Maps {@link CreateTransactionRequest} to {@link Transaction}
      *
@@ -36,5 +38,19 @@ public class TransactionMapper {
         transaction.setNumber(request.getNumber());
         transaction.setBalance(request.getBalance());
         return transaction;
+    }
+
+    /** Maps {@link Transaction} to {@link TransactionResponse}
+     *
+     * @param transaction the entity
+     * @return TransactionResponse
+     */
+    public TransactionResponse mapToTransactionResponse(Transaction transaction) {
+        TransactionResponse result = new TransactionResponse();
+        result.setId(transaction.getId());
+        result.setNumber(transaction.getNumber());
+        result.setBalance(transaction.getBalance());
+        result.setAccountId(transaction.getAccountId());
+        return result;
     }
 }

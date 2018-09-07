@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class AccountMapper {
+
     /**
      * Maps {@link Account} to {@link AccountResponse}
      *
