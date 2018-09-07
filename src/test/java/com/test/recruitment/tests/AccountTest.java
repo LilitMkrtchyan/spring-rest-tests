@@ -24,6 +24,14 @@ public class AccountTest extends AbstractTest {
 	}
 
 	@Test
+	public void getAccountsWithPageAndSize() throws Exception {
+		mockMvc.perform(get("/accounts?page=0&size=1")).andExpect(status().isOk())
+				.andExpect(jsonPath("$.totalElements", is(1)))
+				.andExpect(jsonPath("$.content[0].type", is("SAVING")))
+				.andExpect(jsonPath("$.content[0].balance", is(4210.42)));;
+	}
+
+	@Test
 	public void getAccountDetails() throws Exception {
 		mockMvc.perform(get("/accounts/1")).andExpect(status().isOk())
 				.andExpect(jsonPath("$.active", is(true)))

@@ -25,6 +25,15 @@ public class TransactionTest extends AbstractTest {
 	}
 
 	@Test
+	public void getTransactionsWithPageAndSize() throws Exception {
+		mockMvc.perform(get("/accounts/1/transactions?page=0&size=2"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.totalElements", is(2)))
+				.andExpect(jsonPath("$.content[0].number", is("12151885120")))
+				.andExpect(jsonPath("$.content[0].balance", is(42.12)));;
+	}
+
+	@Test
 	public void getTransactionsNoContent() throws Exception {
 		mockMvc.perform(get("/accounts/2/transactions")).andExpect(
 				status().isNoContent());

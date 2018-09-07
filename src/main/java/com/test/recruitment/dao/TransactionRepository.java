@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.test.recruitment.entity.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -16,7 +17,7 @@ import java.util.Optional;
  *
  */
 @Repository
-public interface TransactionRepository extends JpaRepository<Transaction, String> {
+public interface TransactionRepository extends PagingAndSortingRepository<Transaction, String> {
 
 	/**
 	 * Returns transaction
