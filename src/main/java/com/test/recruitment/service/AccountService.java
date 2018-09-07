@@ -18,6 +18,7 @@ import com.test.recruitment.json.ErrorCode;
 import com.test.recruitment.exception.ServiceException;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Account service
@@ -41,6 +42,7 @@ public class AccountService {
 	 *            the pageable information
 	 * @return the account list
 	 */
+	@Transactional(readOnly = true)
 	public Page<AccountResponse> getAccounts(Pageable p) {
 		return new PageImpl<>(accountRepository.findAll(p)
 				.getContent().stream().map(accountMapper::mapToAccountResponse)
@@ -54,6 +56,7 @@ public class AccountService {
 	 *            the account id
 	 * @return true if the account exists
 	 */
+	@Transactional(readOnly = true)
 	public boolean isAccountExist(String accountId) {
 		return accountRepository.exists(accountId);
 	}
@@ -65,6 +68,7 @@ public class AccountService {
 	 *            the account id
 	 * @return
 	 */
+	@Transactional(readOnly = true)
 	public AccountDetailsResponse getAccountDetails(String accountId) {
 		log.debug("Find account {}", accountId);
 		Account account = accountRepository.findById(accountId).orElseThrow(

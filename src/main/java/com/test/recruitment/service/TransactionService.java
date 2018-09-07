@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
 
@@ -38,6 +39,7 @@ public class TransactionService {
      * @param p         the pageable object
      * @return
      */
+    @Transactional(readOnly = true)
     public Page<TransactionResponse> getTransactionsByAccount(String accountId,
                                                               Pageable p) {
         if (!accountService.isAccountExist(accountId)) {
@@ -45,7 +47,7 @@ public class TransactionService {
                     "Account doesn't exist");
         }
         return new PageImpl<>(transactionRepository
-                .getTransactionsByAccount(accountId, p).getContent().stream()
+                .getTransactionsByAccountId(accountId, p).getContent().stream()
                 .map(transactionMapper::mapToTransactionResponse).collect(Collectors.toList()));
     }
 }

@@ -129,7 +129,7 @@ public class AdminTransactionTest extends AbstractTest {
     @Test
     public void deleteTransactionOnNonExistingAccount() throws Exception {
         mockMvc.perform(delete("/accounts/10/transactions/1")).andExpect(
-                status().isNotFound());
+                status().isForbidden());
     }
 
     /**

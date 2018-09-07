@@ -12,7 +12,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+
 
 import java.util.UUID;
 
@@ -37,6 +39,7 @@ public class AdminTransactionService {
      * @param accountId     the account id
      * @param transactionId the transaction id
      */
+    @Transactional
     public void deleteTransaction(String accountId, String transactionId) {
         log.debug("Delete {} transaction  for account {}", transactionId, accountId);
         Assert.hasText(accountId, "Account id should be provided");
@@ -44,7 +47,7 @@ public class AdminTransactionService {
 
         Transaction transaction = getTransactionById(transactionId);
         validateAccountId(transaction.getAccountId(), accountId);
-        transactionRepository.deleteById(transactionId);
+        transactionRepository.delete(transactionId);
     }
 
     /**
@@ -54,6 +57,7 @@ public class AdminTransactionService {
      * @param accountId the account id
      * @param request   the entity to be mapped to Transaction
      */
+    @Transactional
     public void createTransaction(String accountId, CreateTransactionRequest request) {
         log.debug("Create transaction for {} account", accountId);
         Assert.hasText(accountId, "Account id should be provided");
@@ -74,6 +78,7 @@ public class AdminTransactionService {
      * @param transactionId the transaction id
      * @param request       the entity to be mapped to Transaction
      */
+    @Transactional
     public void updateTransaction(String accountId, String transactionId, UpdateTransactionRequest request) {
         log.debug("Update {} transaction for {} account", transactionId, accountId);
         Assert.hasText(accountId, "Account id should be provided");
@@ -86,7 +91,8 @@ public class AdminTransactionService {
 
         Transaction transaction = transactionMapper.mapToTransaction(request);
         transaction.setId(transactionId);
-        transactionRepository.update(transaction);
+        transaction.setAccountId(accountId);
+        transactionRepository.save(transaction);
     }
 
     /**

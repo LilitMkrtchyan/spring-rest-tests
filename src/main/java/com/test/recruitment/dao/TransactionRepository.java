@@ -4,6 +4,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.test.recruitment.entity.Transaction;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
@@ -13,46 +15,23 @@ import java.util.Optional;
  * @author A525125
  *
  */
-public interface TransactionRepository {
-
-    /**
-     * Deletes the entity with the given transaction id.
-     *
-     * @param id id of the transaction to delete
-     */
-    void deleteById(String id);
-
-    /**
-     * Saves a given transaction
-     *
-     * @param transaction the transaction object to be added
-     */
-    void save(Transaction transaction);
+@Repository
+public interface TransactionRepository extends JpaRepository<Transaction, String> {
 
 	/**
-	 * Updates a given transaction
+	 * Returns transaction
 	 *
-	 * @param transaction the transaction object to be updated
+	 * @param id the transaction id
+	 * @return the entity with the given id or Optional#empty() if none found
 	 */
-	void update(Transaction transaction);
-
-    /**
-     * Returns transaction by id
-     *
-     * @param id id of the transaction to get
-     * @return the entity with the given id or Optional#empty() if none found
-     */
-    Optional<Transaction> findById(String id);
-
+	Optional<Transaction> findById(String id);
 
 	/**
-	 * Get transactions by account
-	 * 
-	 * @param accountId
-	 *            the account id
-	 * @param p
-	 *            the pageable information
-	 * @return
+	 * Returns transactions by account
+	 *
+	 * @param accountId the account id
+	 * @param pageable  the pageable information
+	 * @return a Page
 	 */
-	Page<Transaction> getTransactionsByAccount(String accountId, Pageable p);
+	Page<Transaction> getTransactionsByAccountId(String accountId, Pageable pageable);
 }
